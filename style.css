@@ -1,0 +1,775 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #6AC259;
+}
+
+.active {
+    color: #6AC259 !important;
+}
+
+.btn-green {
+    background-color: #6AC259;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-red {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-green:hover {
+    background-color: #5bb048;
+}
+
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.profile-section {
+    flex: 1;
+    min-width: 300px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.documents-section {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section-card {
+    background-color: #e8f5e5;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.info-item {
+    margin-bottom: 15px;
+}
+
+.info-item h3 {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.info-item p {
+    background-color: #e6e6e6;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.profile-header {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-header-mobile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-image {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.upload-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #6AC259;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid white;
+}
+
+.document-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.document-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.document-item:last-child {
+    border-bottom: none;
+}
+
+.document-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.document-icon {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.document-name {
+    font-weight: 500;
+}
+
+.document-action {
+    color: #666;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.document-action:hover {
+    color: #6AC259;
+}
+
+.upload-btn {
+    background-color: #6AC259;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: 500;
+    margin-top: 15px;
+    display: block;
+    width: 100%;
+}
+
+.upload-btn:hover {
+    background-color: #5bb048;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tab {
+    padding: 10px 0;
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.tab.active {
+    color: #6AC259;
+    border-bottom: 2px solid #6AC259;
+}
+
+.tab:hover {
+    color: #6AC259;
+}
+
+.profile-cover {
+    height: 150px;
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.profile-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-picture-large {
+    position: absolute;
+    bottom: -50px;
+    left: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid white;
+    background-color: #ddd;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-picture-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-actions {
+    position: absolute;
+    bottom: -30px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.mobile-header {
+    display: none;
+}
+
+/* Partners Section Styles */
+.partners-section {
+    display: none;
+    width: 100%;
+}
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.partner-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.partner-card:hover {
+    transform: translateY(-5px);
+}
+
+.partner-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.partner-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.partner-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.partner-info {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.partner-contact {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.partner-contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.partner-contact-item i {
+    margin-right: 10px;
+    color: #6AC259;
+    width: 20px;
+}
+
+.view-location {
+    display: inline-block;
+    margin-top: 10px;
+    color: #6AC259;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.view-location:hover {
+    color: #6AC259;
+}
+
+/* Wallet Styles */
+.wallet-content {
+    padding: 20px;
+}
+
+.balance-display {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.balance-display h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.balance-display p {
+    color: #666;
+}
+
+.wallet-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.transaction-history {
+    margin-top: 30px;
+}
+
+.transaction-history h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.transaction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.transaction-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.transaction-type {
+    font-weight: 500;
+    color: #333;
+}
+
+.transaction-date {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.transaction-amount {
+    font-weight: 600;
+    color: #333;
+}
+
+.transaction-amount.positive {
+    color: #6AC259;
+}
+
+.transaction-amount.negative {
+    color: #ff0000;
+}
+
+/* Security Styles */
+.security-content {
+    padding: 20px;
+}
+
+.security-item {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.security-item:last-child {
+    margin-bottom: 0;
+}
+
+.security-item h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.security-item p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.security-item button {
+    width: 120px;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    .mobile-header {
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .profile-cover {
+        display: none;
+    }
+
+    .tabs {
+        overflow-x: auto;
+    }
+
+    .partners-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.tab-content {
+    display: none;
+    width: 100%;
+}
+
+.tab-content.active {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Appointments Styles */
+.appointments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.appointment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    border-left: 4px solid #6AC259;
+}
+
+.appointment-item.past {
+    border-left-color: #666;
+    opacity: 0.8;
+}
+
+.appointment-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.appointment-date {
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    min-width: 60px;
+}
+
+.appointment-date .date {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.appointment-date .month {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.appointment-details h3 {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.appointment-details p {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.appointment-time {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.appointment-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.appointment-form {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-group select,
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+}
+
+/* NFC Settings Styles */
+.nfc-content {
+    padding: 20px;
+}
+
+.nfc-status {
+    margin-bottom: 30px;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #e8f5e9;
+    border-radius: 8px;
+}
+
+.status-indicator i {
+    color: #6AC259;
+    font-size: 1.2rem;
+}
+
+.nfc-settings {
+    margin-bottom: 30px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.setting-info h4 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.setting-info p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Switch Styles */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #6AC259;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.nfc-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.nfc-actions h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
