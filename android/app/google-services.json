@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1067628919771",
+    "project_id": "tagit-emergency",
+    "storage_bucket": "tagit-emergency.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067628919771:android:3cd6cde42baff60efc45fe",
+        "android_client_info": {
+          "package_name": "com.tagit.emergency"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbRd7Shxna9gUVLSP6CpoO-pvhfvNbNMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
