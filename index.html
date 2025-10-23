@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAGit! - NFC Tag Information System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>TAGit!</h1>
+                </div>
+                <nav class="main-nav">
+                    <a href="#" class="nav-link">Home</a>
+                    <a href="#" class="nav-link">Partners</a>
+                    <a href="#" class="nav-link">Security</a>
+                    <a href="#" class="nav-link">Support</a>
+                    <button class="emergency-btn">Emergency</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- User Profile Section -->
+    <section class="user-profile">
+        <div class="container">
+            <div class="profile-content">
+                <div class="profile-info">
+                    <div class="profile-avatar">
+                        <div class="avatar-circle">
+                            <span>MI</span>
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <h2 id="userName">Murty Venugopalan Iyer</h2>
+                        <p>NFC Tag User</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" data-tab="home">Home</button>
+                <button class="tab-btn" data-tab="appointments">Appointments</button>
+                <button class="tab-btn" data-tab="wallet">Wallet</button>
+                <button class="tab-btn" data-tab="nfc-settings">NFC Settings</button>
+            </div>
+
+            <!-- Tab Contents -->
+            
+            <!-- Home Tab -->
+            <div id="home" class="tab-content active">
+                <div class="home-layout">
+                    <div class="personal-info-section">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Personal Information</h3>
+                                <button class="btn btn--sm btn--outline" id="editPersonalInfo">Edit</button>
+                            </div>
+                            <div class="card__body">
+                                <form id="personalInfoForm">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Age</label>
+                                            <input type="number" class="form-control" id="age" value="47" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Emergency Email</label>
+                                            <input type="email" class="form-control" id="emergencyEmail" value="murtyiver45@example.com" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Phone No.</label>
+                                            <input type="tel" class="form-control" id="phoneNo" value="+91 9876324122" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Date of Birth</label>
+                                            <input type="text" class="form-control" id="dateOfBirth" value="10/02/1977" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Languages Spoken</label>
+                                        <input type="text" class="form-control" id="languagesSpoken" value="English, Hindi, Malayalam" readonly>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Father's Name</label>
+                                            <input type="text" class="form-control" id="fatherName" value="Mr. Venugopalan Iyer" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Father's Contact Number</label>
+                                            <input type="tel" class="form-control" id="fatherContact" value="+91 9876444563" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label class="form-label">Allergies</label>
+                                            <input type="text" class="form-control" id="allergies" value="Gluten-Free, Pollen, Dust" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Blood Group</label>
+                                            <input type="text" class="form-control" id="bloodGroup" value="O+" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions hidden">
+                                        <button type="submit" class="btn btn--primary">Save Changes</button>
+                                        <button type="button" class="btn btn--outline" id="cancelEdit">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reports-documents-section">
+                        <!-- Medical Reports -->
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Medical Reports</h3>
+                            </div>
+                            <div class="card__body">
+                                <div id="medicalReportsList" class="reports-list">
+                                    <!-- Reports will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Identification Documents -->
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Identification Documents</h3>
+                            </div>
+                            <div class="card__body">
+                                <div id="identificationDocsList" class="documents-list">
+                                    <!-- Documents will be populated by JavaScript -->
+                                </div>
+                                <button class="btn btn--primary btn--full-width">
+                                    <span>+</span> Upload New Document
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appointments Tab -->
+            <div id="appointments" class="tab-content">
+                <div class="appointments-layout">
+                    <div class="appointments-list-section">
+                        <!-- Upcoming Appointments -->
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Upcoming Appointments</h3>
+                            </div>
+                            <div class="card__body">
+                                <div id="upcomingAppointmentsList">
+                                    <!-- Appointments will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Past Appointments -->
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Past Appointments</h3>
+                            </div>
+                            <div class="card__body">
+                                <div id="pastAppointmentsList">
+                                    <!-- Past appointments will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="book-appointment-section">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Book New Appointment</h3>
+                            </div>
+                            <div class="card__body">
+                                <form id="bookAppointmentForm">
+                                    <div class="form-group">
+                                        <label class="form-label">Select Department</label>
+                                        <select class="form-control" id="departmentSelect">
+                                            <option value="">Choose Department</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Select Doctor</label>
+                                        <select class="form-control" id="doctorSelect">
+                                            <option value="">Choose Doctor</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Select Date</label>
+                                        <input type="date" class="form-control" id="appointmentDate">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Select Time</label>
+                                        <select class="form-control" id="appointmentTime">
+                                            <option value="">Choose Time</option>
+                                            <option value="09:00 AM">09:00 AM</option>
+                                            <option value="10:00 AM">10:00 AM</option>
+                                            <option value="11:00 AM">11:00 AM</option>
+                                            <option value="12:00 PM">12:00 PM</option>
+                                            <option value="02:00 PM">02:00 PM</option>
+                                            <option value="03:00 PM">03:00 PM</option>
+                                            <option value="04:00 PM">04:00 PM</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn--primary btn--full-width">Book Appointment</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wallet Tab -->
+            <div id="wallet" class="tab-content">
+                <div class="wallet-layout">
+                    <div class="wallet-balance-section">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Wallet Balance</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="balance-display">
+                                    <div class="balance-amount">
+                                        ₹<span id="walletBalance">25,000</span>
+                                    </div>
+                                    <p class="balance-text">Available Balance</p>
+                                </div>
+                                <div class="wallet-actions">
+                                    <button class="btn btn--primary" id="addMoneyBtn">Add Money</button>
+                                    <button class="btn btn--outline" id="withdrawBtn">Withdraw</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Recent Transactions</h3>
+                            </div>
+                            <div class="card__body">
+                                <div id="transactionsList">
+                                    <!-- Transactions will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NFC Settings Tab -->
+            <div id="nfc-settings" class="tab-content">
+                <div class="nfc-settings-layout">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Current Status</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="nfc-status">
+                                <div class="status-indicator">
+                                    <span class="status-dot active"></span>
+                                    <span class="status-text">NFC Tag is Active</span>
+                                </div>
+                                <p class="status-description">Your NFC tag is currently enabled and can be used for medical data sharing.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Data Sharing Settings</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="toggle-options">
+                                <div class="toggle-option">
+                                    <div class="toggle-info">
+                                        <h4>Share Medical History</h4>
+                                        <p>Allow hospitals to access your complete medical history</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="medicalHistoryToggle">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                
+                                <div class="toggle-option">
+                                    <div class="toggle-info">
+                                        <h4>Share Emergency Contacts</h4>
+                                        <p>Allow access to your emergency contact information</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="emergencyContactsToggle">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                
+                                <div class="toggle-option">
+                                    <div class="toggle-info">
+                                        <h4>Share Insurance Details</h4>
+                                        <p>Allow hospitals to access your insurance information</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="insuranceDetailsToggle">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Tag Management</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="tag-management-actions">
+                                <button class="btn btn--primary btn--full-width mb-8">Pair New Tag</button>
+                                <button class="btn btn--primary btn--full-width mb-8">View Paired Devices</button>
+                                <button class="btn btn--outline btn--full-width" style="color: var(--color-error); border-color: var(--color-error);">Deactivate Current Tag</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden">
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Modals -->
+    <div id="confirmModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Confirm Action</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage">Are you sure you want to proceed?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--outline" id="modalCancel">Cancel</button>
+                <button class="btn btn--primary" id="modalConfirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="walletModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="walletModalTitle">Add Money</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="walletForm">
+                    <div class="form-group">
+                        <label class="form-label">Amount (₹)</label>
+                        <input type="number" class="form-control" id="walletAmount" min="1" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--outline" id="walletModalCancel">Cancel</button>
+                <button class="btn btn--primary" id="walletModalConfirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
