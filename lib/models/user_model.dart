@@ -11,6 +11,7 @@ class UserModel {
   final String? medicalConditions;
   final String? allergies;
   final List<EmergencyContact> emergencyContacts;
+  final List<MedicalDocument> medicalDocuments;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -25,6 +26,7 @@ class UserModel {
     this.medicalConditions,
     this.allergies,
     this.emergencyContacts = const [],
+    this.medicalDocuments = const [],
     required this.createdAt,
     required this.updatedAt,
   });
@@ -42,6 +44,7 @@ class UserModel {
       'medicalConditions': medicalConditions,
       'allergies': allergies,
       'emergencyContacts': emergencyContacts.map((c) => c.toMap()).toList(),
+      'medicalDocuments': medicalDocuments.map((d) => d.toMap()).toList(),
       'createdAt': Timestamp.fromDate(createdAt),
       'updatedAt': Timestamp.fromDate(updatedAt),
     };
@@ -63,6 +66,10 @@ class UserModel {
               ?.map((c) => EmergencyContact.fromMap(c as Map<String, dynamic>))
               .toList() ??
           [],
+      medicalDocuments: (map['medicalDocuments'] as List<dynamic>?)
+              ?.map((d) => MedicalDocument.fromMap(d as Map<String, dynamic>))
+              .toList() ??
+          [],
       createdAt: (map['createdAt'] as Timestamp).toDate(),
       updatedAt: (map['updatedAt'] as Timestamp).toDate(),
     );
@@ -80,6 +87,7 @@ class UserModel {
     String? medicalConditions,
     String? allergies,
     List<EmergencyContact>? emergencyContacts,
+    List<MedicalDocument>? medicalDocuments,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -94,6 +102,7 @@ class UserModel {
       medicalConditions: medicalConditions ?? this.medicalConditions,
       allergies: allergies ?? this.allergies,
       emergencyContacts: emergencyContacts ?? this.emergencyContacts,
+      medicalDocuments: medicalDocuments ?? this.medicalDocuments,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
@@ -125,5 +134,63 @@ class EmergencyContact {
       phone: map['phone'] ?? '',
       relationship: map['relationship'] ?? '',
     );
+  }
+}
+
+class MedicalDocument {
+  final String id;
+  final String name;
+  final String type; // 'prescription', 'report', 'insurance', 'other'
+  final String url;
+  final String? thumbnailUrl;
+  final int fileSizeBytes;
+  final DateTime uploadedAt;
+
+  MedicalDocument({
+    required this.id,
+    required this.name,
+    required this.type,
+    required this.url,
+    this.thumbnailUrl,
+    required this.fileSizeBytes,
+    required this.uploadedAt,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'type': type,
+      'url': url,
+      'thumbnailUrl': thumbnailUrl,
+      'fileSizeBytes': fileSizeBytes,
+      'uploadedAt': Timestamp.fromDate(uploadedAt),
+    };
+  }
+
+  factory MedicalDocument.fromMap(Map<String, dynamic> map) {
+    return MedicalDocument(
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      type: map['type'] ?? 'other',
+      url: map['url'] ?? '',
+      thumbnailUrl: map['thumbnailUrl'],
+      fileSizeBytes: map['fileSizeBytes'] ?? 0,
+      uploadedAt: (map['uploadedAt'] as Timestamp).toDate(),
+    );
+  }
+
+  String get formattedSize {
+    if (fileSizeBytes < 1024) {
+      return '$fileSizeBytes B';
+    } else if (fileSizeBytes < 1024 * 1024) {
+      return '${(fileSizeBytes / 1024).toStringAsFixed(1)} KB';
+    } else {
+      return '${(fileSizeBytes / (1024 * 1024)).toStringAsFixed(1)} MB';
+    }
+  }
+
+  String get fileExtension {
+    return name.split('.').last.toUpperCase();
   }
 }

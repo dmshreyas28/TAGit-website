@@ -8,10 +8,14 @@ import 'services/auth_service.dart';
 import 'services/firestore_service.dart';
 import 'services/nfc_service.dart';
 import 'services/location_service.dart';
+import 'services/connectivity_service.dart';
 
 // Screens
 import 'screens/auth/login_screen.dart';
-import 'screens/home/home_screen.dart';
+import 'screens/home/improved_home_screen.dart';
+
+// Utils
+import 'utils/app_theme.dart';
 
 void main() async {
   // Ensure Flutter is initialized
@@ -21,7 +25,9 @@ void main() async {
   await Firebase.initializeApp();
 
   runApp(const MyApp());
-}class MyApp extends StatelessWidget {
+}
+
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
@@ -32,6 +38,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => FirestoreService()),
         ChangeNotifierProvider(create: (_) => NFCService()),
         ChangeNotifierProvider(create: (_) => LocationService()),
+        ChangeNotifierProvider(create: (_) => ConnectivityService()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
@@ -41,39 +48,14 @@ void main() async {
           return MaterialApp(
             title: 'TAGit Emergency Response',
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.red,
-                primary: Colors.red,
-              ),
-              useMaterial3: true,
-              appBarTheme: const AppBarTheme(
-                centerTitle: true,
-                elevation: 2,
-              ),
-              // cardTheme removed to maintain compatibility with the
-              // current Material theme data types. Specific card styling
-              // can be set per-widget or re-added if targeting a
-              // concrete Flutter SDK that exposes CardThemeData.
-              elevatedButtonTheme: ElevatedButtonThemeData(
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 12,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
-            ),
+            theme: AppTheme.lightTheme,
             home: Consumer<AuthService>(
               builder: (context, authService, _) {
                 // Show login if not authenticated, else show home
                 if (authService.user == null) {
                   return const LoginScreen();
                 } else {
-                  return const HomeScreen();
+                  return const ImprovedHomeScreen();
                 }
               },
             ),

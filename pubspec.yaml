@@ -48,6 +48,9 @@ dependencies:
   geolocator: ^11.0.0             # Get GPS coordinates
   permission_handler: ^11.2.0     # Request permissions
   
+  # Network & Connectivity
+  connectivity_plus: ^6.0.5       # Monitor network status
+  
   # UI Components
   flutter_screenutil: ^5.9.0      # Responsive UI
   
@@ -56,6 +59,7 @@ dependencies:
   
   # File Handling
   image_picker: ^1.0.7            # Pick images
+  file_picker: ^8.0.0+1           # Pick documents/PDFs
   
   # Local Storage
   shared_preferences: ^2.2.2      # Key-value storage
@@ -64,7 +68,7 @@ dependencies:
   # Utilities
   intl: ^0.18.1                   # Date formatting
   uuid: ^4.3.3                    # Generate unique IDs
-  url_launcher: ^6.3.2
+  url_launcher: ^6.3.2            # Launch URLs, phone, SMS
 
 dev_dependencies:
   flutter_test:

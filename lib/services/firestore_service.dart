@@ -1,16 +1,45 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import '../models/user_model.dart';
+import 'local_storage_service.dart';
 
 class FirestoreService extends ChangeNotifier {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   UserModel? _currentUser;
   bool _isLoading = false;
   String? _errorMessage;
+  bool _isOffline = false;
 
   UserModel? get currentUser => _currentUser;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
+  bool get isOffline => _isOffline;
+
+  FirestoreService() {
+    _enableOfflinePersistence();
+  }
+
+  // Enable offline persistence
+  Future<void> _enableOfflinePersistence() async {
+    try {
+      // Enable offline persistence for Firestore
+      _db.settings = const Settings(
+        persistenceEnabled: true,
+        cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
+      );
+      debugPrint('✅ Offline persistence enabled');
+    } catch (e) {
+      debugPrint('⚠️ Offline persistence error: $e');
+    }
+  }
+
+  // Check network connectivity status
+  void updateOfflineStatus(bool offline) {
+    if (_isOffline != offline) {
+      _isOffline = offline;
+      notifyListeners();
+    }
+  }
 
   // Create user profile in Firestore
   Future<bool> createUserProfile(UserModel user) async {
@@ -44,6 +73,18 @@ class FirestoreService extends ChangeNotifier {
 
       if (doc.exists) {
         _currentUser = UserModel.fromMap(doc.data()!);
+        
+        // Check if data is from cache (offline)
+        if (doc.metadata.isFromCache) {
+          _isOffline = true;
+          debugPrint('📦 Data loaded from cache (offline mode)');
+        } else {
+          _isOffline = false;
+          debugPrint('🌐 Data loaded from server (online mode)');
+          // Save to local storage when online
+          await LocalStorageService.saveUserProfile(_currentUser!);
+        }
+        
         _isLoading = false;
         notifyListeners();
         return _currentUser;
@@ -54,8 +95,22 @@ class FirestoreService extends ChangeNotifier {
         return null;
       }
     } catch (e) {
+      // Try loading from local storage if network fails
+      debugPrint('⚠️ Network error, trying local storage: $e');
+      final localUser = await LocalStorageService.getUserProfile();
+      
+      if (localUser != null) {
+        _currentUser = localUser;
+        _isOffline = true;
+        _isLoading = false;
+        notifyListeners();
+        debugPrint('✅ Loaded profile from local storage');
+        return _currentUser;
+      }
+      
       _isLoading = false;
       _errorMessage = 'Failed to load profile: ${e.toString()}';
+      _isOffline = true;
       notifyListeners();
       return null;
     }
@@ -72,14 +127,24 @@ class FirestoreService extends ChangeNotifier {
       await _db.collection('users').doc(user.uid).update(updatedUser.toMap());
 
       _currentUser = updatedUser;
+      
+      // Save to local storage
+      await LocalStorageService.saveUserProfile(updatedUser);
+      
       _isLoading = false;
       notifyListeners();
       return true;
     } catch (e) {
+      // If offline, save locally and queue for sync
+      debugPrint('⚠️ Update failed, saving locally: $e');
+      _currentUser = user.copyWith(updatedAt: DateTime.now());
+      await LocalStorageService.saveUserProfile(_currentUser!);
+      
       _isLoading = false;
-      _errorMessage = 'Failed to update profile: ${e.toString()}';
+      _errorMessage = 'Saved locally. Will sync when online.';
+      _isOffline = true;
       notifyListeners();
-      return false;
+      return true; // Return true since we saved locally
     }
   }
 

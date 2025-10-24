@@ -97,7 +97,13 @@ class LocationService extends ChangeNotifier {
   // Get Google Maps URL
   String getGoogleMapsUrl() {
     if (_currentPosition == null) return '';
-    // Use geo: URI scheme for better Android compatibility
+    // Use https:// Google Maps URL for better compatibility across apps
+    return 'https://www.google.com/maps?q=${_currentPosition!.latitude},${_currentPosition!.longitude}';
+  }
+  
+  // Get geo URI (for native map apps)
+  String getGeoUri() {
+    if (_currentPosition == null) return '';
     return 'geo:${_currentPosition!.latitude},${_currentPosition!.longitude}?q=${_currentPosition!.latitude},${_currentPosition!.longitude}';
   }
 
