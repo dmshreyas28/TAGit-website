@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../services/auth_service.dart';
 import '../../services/firestore_service.dart';
 import '../../services/storage_service.dart';
@@ -454,10 +455,33 @@ class _MedicalDocumentsScreenState extends State<MedicalDocumentsScreen> {
               ),
             ),
           ],
-          onSelected: (value) {
+          onSelected: (value) async {
             if (value == 'view') {
-              // TODO: Implement document viewer
-              SnackBarHelper.showInfo(context, 'Opening document...');
+              // Open document URL in browser (Firebase Storage will handle authentication)
+              try {
+                final uri = Uri.parse(doc.url);
+                // Use platformDefault to let the system choose the best app
+                final launched = await launchUrl(
+                  uri,
+                  mode: LaunchMode.platformDefault,
+                );
+                
+                if (!launched && mounted) {
+                  // If it fails, try opening in external browser
+                  await launchUrl(
+                    uri,
+                    mode: LaunchMode.externalApplication,
+                  );
+                }
+              } catch (e) {
+                if (mounted) {
+                  // Show helpful error message
+                  SnackBarHelper.showError(
+                    context,
+                    'Unable to open document. Please ensure you have a compatible app installed.',
+                  );
+                }
+              }
             } else if (value == 'delete') {
               _deleteDocument(doc);
             }
