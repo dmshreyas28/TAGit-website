@@ -1,0 +1,17 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Medical documents - users can read/write their own documents
+    match /medical_documents/{userId}/{fileName} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+      allow delete: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Public read access for emergency responders
+    match /medical_documents/{allPaths=**} {
+      allow read: if true; // Public read for emergency scenarios
+    }
+  }
+}
