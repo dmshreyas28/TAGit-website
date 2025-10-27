@@ -48,35 +48,41 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-12">
-      <div className="max-w-md w-full">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-red-50/20 to-gray-50 px-4 py-12 relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-red-200/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-pink-200/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+      
+      <div className="max-w-md w-full relative z-10">
         {/* Logo/Title */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-full mb-4">
-            <LogIn className="w-8 h-8 text-white" />
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-red-600 to-red-900 rounded-3xl mb-4 shadow-2xl transform hover:scale-110 transition-transform">
+            <LogIn className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Welcome Back</h1>
-          <p className="text-gray-600 mt-2">Sign in to your TAGit account</p>
+          <h1 className="text-4xl font-extrabold bg-gradient-to-r from-red-600 to-red-900 bg-clip-text text-transparent mb-2">
+            Welcome Back
+          </h1>
+          <p className="text-gray-600 text-lg">Sign in to your TAGit account</p>
         </div>
 
         {/* Login Form */}
-        <div className="card">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
           <form onSubmit={handleLogin} className="space-y-6">
             {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
                 Email Address
               </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-gray-400" />
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Mail className="h-5 w-5 text-gray-400 group-focus-within:text-red-600 transition-colors" />
                 </div>
                 <input
                   id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  className="block w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all text-gray-900 placeholder-gray-400"
                   placeholder="your.email@example.com"
                   disabled={loading}
                 />
@@ -85,19 +91,19 @@ export default function LoginPage() {
 
             {/* Password Field */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
                 Password
               </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Lock className="h-5 w-5 text-gray-400 group-focus-within:text-red-600 transition-colors" />
                 </div>
                 <input
                   id="password"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  className="block w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all text-gray-900 placeholder-gray-400"
                   placeholder="••••••••"
                   disabled={loading}
                 />
@@ -108,7 +114,7 @@ export default function LoginPage() {
             <div className="flex items-center justify-end">
               <Link
                 href="/forgot-password"
-                className="text-sm text-primary hover:text-primary-dark transition-colors"
+                className="text-sm text-red-600 hover:text-red-700 font-medium transition-colors"
               >
                 Forgot password?
               </Link>
@@ -118,7 +124,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full flex items-center justify-center gap-2"
+              className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-red-600 to-red-800 text-white rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {loading ? (
                 <>
@@ -136,11 +142,11 @@ export default function LoginPage() {
 
           {/* Sign Up Link */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-gray-600">
               Don't have an account?{' '}
               <Link
                 href="/signup"
-                className="text-primary hover:text-primary-dark font-medium transition-colors"
+                className="text-red-600 hover:text-red-700 font-semibold transition-colors"
               >
                 Sign up
               </Link>
@@ -149,10 +155,10 @@ export default function LoginPage() {
         </div>
 
         {/* Back to Home */}
-        <div className="mt-6 text-center">
+        <div className="mt-8 text-center">
           <Link
             href="/"
-            className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors font-medium"
           >
             ← Back to Home
           </Link>
