@@ -6,7 +6,9 @@ import { useAuth } from '@/contexts/AuthContext';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase/firebase';
 import toast from 'react-hot-toast';
-import ProfileEditor from '@/components/ProfileEditor';
+import BasicInfoEditor from '@/components/BasicInfoEditor';
+import MedicalInfoEditor from '@/components/MedicalInfoEditor';
+import EmergencyContactsEditor from '@/components/EmergencyContactsEditor';
 import DocumentUpload from '@/components/DocumentUpload';
 import Link from 'next/link';
 import { 
@@ -27,7 +29,9 @@ import {
 export default function DashboardPage() {
   const { user, userProfile, loading, refreshProfile } = useAuth();
   const router = useRouter();
-  const [showProfileEditor, setShowProfileEditor] = useState(false);
+  const [showBasicInfoEditor, setShowBasicInfoEditor] = useState(false);
+  const [showMedicalInfoEditor, setShowMedicalInfoEditor] = useState(false);
+  const [showEmergencyContactsEditor, setShowEmergencyContactsEditor] = useState(false);
   const [showDocumentUpload, setShowDocumentUpload] = useState(false);
 
   useEffect(() => {
@@ -104,7 +108,7 @@ export default function DashboardPage() {
         {/* Quick Actions Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <button 
-            onClick={() => setShowProfileEditor(true)}
+            onClick={() => setShowBasicInfoEditor(true)}
             className="card hover:shadow-lg transition-all group"
           >
             <div className="text-center">
@@ -117,7 +121,7 @@ export default function DashboardPage() {
           </button>
 
           <button 
-            onClick={() => setShowProfileEditor(true)}
+            onClick={() => setShowMedicalInfoEditor(true)}
             className="card hover:shadow-lg transition-all group"
           >
             <div className="text-center">
@@ -143,7 +147,7 @@ export default function DashboardPage() {
           </button>
 
           <button 
-            onClick={() => setShowProfileEditor(true)}
+            onClick={() => setShowEmergencyContactsEditor(true)}
             className="card hover:shadow-lg transition-all group"
           >
             <div className="text-center">
@@ -267,8 +271,16 @@ export default function DashboardPage() {
       </main>
 
       {/* Modals */}
-      {showProfileEditor && (
-        <ProfileEditor onClose={() => setShowProfileEditor(false)} />
+      {showBasicInfoEditor && (
+        <BasicInfoEditor onClose={() => setShowBasicInfoEditor(false)} />
+      )}
+
+      {showMedicalInfoEditor && (
+        <MedicalInfoEditor onClose={() => setShowMedicalInfoEditor(false)} />
+      )}
+
+      {showEmergencyContactsEditor && (
+        <EmergencyContactsEditor onClose={() => setShowEmergencyContactsEditor(false)} />
       )}
 
       {showDocumentUpload && (
